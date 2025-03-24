@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title="Book a Mover">
+        <div class="slds-p-around_medium">
+            <lightning-input label="Pickup Location" value={pickupLocation} onchange={handlePickupChange}></lightning-input>
+            <lightning-input label="Drop Location" value={dropLocation} onchange={handleDropChange}></lightning-input>
+            <lightning-input type="datetime" label="Booking Date & Time" value={bookingDate} onchange={handleDateChange}></lightning-input>
+
+            <lightning-combobox label="Select Mover" value={selectedMover} options={moverOptions} onchange={handleMoverChange}></lightning-combobox>
+            
+            <template for:each={items} for:item="item">
+                <div key={item.id} class="slds-box slds-m-top_small">
+                    <lightning-input label="Item Name" value={item.name} data-id={item.id} onchange={handleItemChange}></lightning-input>
+                    <lightning-input type="number" label="Quantity" value={item.quantity} data-id={item.id} onchange={handleQuantityChange}></lightning-input>
+                    <lightning-input label="Description" value={item.description} data-id={item.id} onchange={handleDescriptionChange}></lightning-input>
+                    <lightning-button label="Remove" variant="destructive" data-id={item.id} onclick={removeItem}></lightning-button>
+                </div>
+            </template>
+
+            <lightning-button label="Add Item" onclick={addItem}></lightning-button>
+            <lightning-button label="Book Now" variant="brand" onclick={createBooking} class="slds-m-left_small"></lightning-button>
+        </div>
+    </lightning-card>
+</template>

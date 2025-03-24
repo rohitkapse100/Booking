@@ -1,0 +1,117 @@
+:host {
+    display: block;
+}
+
+/* Card Styling */
+lightning-card {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Input Fields - Make all the same size */
+lightning-input {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px;
+}
+
+/* Center all content */
+.slds-m-around_medium {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Button Group Styling */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Spacing between buttons */
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* Beautiful Button Styling */
+lightning-button {
+    min-width: 200px;
+    height: 45px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+}
+
+/* Default Button Color */
+lightning-button:not([variant="brand"]) { /* Light Blue */
+    color: white;
+    border: none;
+}
+
+/* Submit Button (Brand Variant) */
+lightning-button[variant="brand"] { /* Green */
+    color: white;
+}
+
+/* Disabled Submit Button */
+lightning-button[variant="brand"]:disabled {
+    background-color: #A9A9A9; /* Grey */
+    color: white;
+    cursor: not-allowed;
+}
+
+/* Modal Styling */
+.slds-modal__container {
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.slds-modal__header {
+    background-color: #0070d2;
+    color: white;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Modal Input Fields */
+.slds-modal__content lightning-input {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Modal Footer Styling */
+.slds-modal__footer {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
+/* File Upload Styling */
+lightning-file-upload {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* CIBIL Score Styling */
+.slds-modal__content p {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Responsive for Mobile */
+@media screen and (max-width: 500px) {
+    .button-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    lightning-button {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 10px;
+    }
+}

@@ -1,0 +1,45 @@
+<template>
+    <lightning-card title="Product Approval">
+        <div class="slds-p-around_medium">
+            <!-- Display Error if Product Fetching Fails -->
+            <template if:true={hasError}>
+                <div class="slds-text-color_error">
+                    Error: {error}
+                </div>
+            </template>
+
+            <!-- Display Loading Spinner while fetching product details -->
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </template>
+
+            <!-- Display Product Details if Available -->
+            <template if:true={product}>
+                <p><strong>Product Name:</strong> {product.Name}</p>
+                <p><strong>Product Code:</strong> {product.ProductCode}</p>
+                <p><strong>Description:</strong> {product.Description}</p>
+                <p><strong>Approval Status:</strong> {product.Approval_Status__c}</p>
+                <p><strong>Approver:</strong> {product.Approver__c}</p>
+
+                <!-- Comment Section -->
+                <lightning-textarea
+                    label="Comments"
+                    value={comment}
+                    onchange={handleCommentChange}>
+                </lightning-textarea>
+
+                <!-- Approve or Reject Buttons -->
+                <lightning-button
+                    label="Approve"
+                    variant="success"
+                    onclick={handleApprove}>
+                </lightning-button>
+                <lightning-button
+                    label="Reject"
+                    variant="destructive"
+                    onclick={handleReject}>
+                </lightning-button>
+            </template>
+        </div>
+    </lightning-card>
+</template>

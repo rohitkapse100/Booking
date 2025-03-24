@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Available Movers">
+        <template if:true={movers}>
+            <lightning-layout multiple-rows>
+                <template for:each={movers} for:item="mover">
+                    <lightning-layout-item key={mover.Id} size="12" padding="around-small">
+                        <div class="mover-tile">
+                            <p class="mover-name">{mover.Name}</p>
+                            <p>💰 Price: ${mover.Price__c}</p>
+                            <p>⭐ Rating: {mover.Average_Rating__c}</p>
+                        </div>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </template>
+        <template if:false={movers}>
+            <p>No movers available.</p>
+        </template>
+    </lightning-card>
+</template>

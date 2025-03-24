@@ -1,0 +1,38 @@
+<template>
+    <lightning-card title="Booking Status Tracker">
+        
+        <template if:true={errorMessage}>
+            <p style="color: red; font-weight: bold; text-align: center;">{errorMessage}</p>
+        </template>
+
+        <template if:true={bookings}>
+            <div class="slds-box slds-p-around_medium">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th>Booking Name</th>
+                            <th>Mover</th>
+                            <th>Pickup Location</th>
+                            <th>Drop Location</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={bookings} for:item="booking">
+                            <tr key={booking.Id}>
+                                <td>{booking.Name}</td>
+                                <td>{booking.Mover__r.Name}</td>
+                                <td>{booking.Pickup_Location__c}</td>
+                                <td>{booking.Drop_Location__c}</td>
+                                <td>{booking.Booking_Date__c}</td>
+                                <td>{booking.Status__c}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+        
+    </lightning-card>
+</template>

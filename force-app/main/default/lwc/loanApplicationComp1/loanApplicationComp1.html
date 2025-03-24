@@ -1,0 +1,213 @@
+<template>
+    <lightning-card>
+        <lightning-layout horizontal-align="center">
+            <lightning-layout-item class="slds-box slds-theme_shade"  size="8">
+                <lightning-layout horizontal-align="center">
+                    <lightning-layout-item size="12">
+                        <!--style="padding:0.5rem;background:#16325c"-->
+                        <lightning-card icon-name="custom:custom41" title="Calculate EMI"
+                            class="slds-text-align_center"></lightning-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout horizontal-align="spread">
+                    <lightning-layout-item size="4">
+                        <lightning-input type="Number" label="Loan Amount : " placeholder="Enter Loan Amount"
+                            onchange={HandleLoanAmount} required></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="4">
+                        <lightning-input type="Number" label="Tenure (months) : " placeholder="Enter Tenure in months"
+                            onchange={HandleTenure} required></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="3" class="slds-m-horizonatal_small">
+                        <lightning-input type="Number" label="Interest Rate (%)" placeholder="Auto Select"
+                            value={interestRate} required disabled></lightning-input>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <!--Button-->
+                <lightning-layout horizontal-align="center">
+                    <lightning-layout-item class="slds-m-vertical_medium">
+                        <lightning-button variant="brand-outline" label="Generate EMI"
+                            title="It will calculate the EMI based on our standard Interest rates."
+                            onclick={handleGenrateEMI} class="slds-m-left_x-small" disabled={isButtondisabled}></lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <!--EMI per month -->
+                <lightning-layout if:true={show} horizontal-align="Center" class="slds-m-vertical_medium" multiple-rows>
+                    <lightning-layout-item size="11">
+                        <lightning-card>
+                            <div class="slds-grid slds-align_absolute-center">
+                                <lightning-icon icon-name="utility:money" size="small" class="slds-m-right_small">
+                                </lightning-icon>
+                                <span class="emi-text">{Title}</span>
+                            </div>
+                        </lightning-card>
+                    </lightning-layout-item>
+                    <!--Apply Loan Button -->
+                    <lightning-layout-item class="slds-m-vertical_large slds-m-left_medium">
+                        <lightning-button variant="Brand" label="Apply for Loan" onclick={openModal1}
+                            class="slds-m-left_x-small"></lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+    <!-- Modal 1 for Entering Applicant Name -->
+    <template if:true={ModalOpen1}>
+        <section role="dialog" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Header -->
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium">Enter Personal Details</h2>
+                    <lightning-button-icon icon-name="utility:close" variant="bare-inverse" class="slds-modal__close"
+                        onclick={closeModal}></lightning-button-icon>
+                </header>
+                <!-- Body -->
+                <div class="slds-modal__content slds-p-horizontal_medium">
+                    <lightning-input type="text" label="Applicant Name" placeholder="Enter your name"
+                        value={applicantName} onchange={handleNameChange} required></lightning-input>
+                </div>
+                <div class="slds-modal__content slds-p-horizontal_medium">
+                    <lightning-layout>
+                        <lightning-layout-item size="6">
+                            <lightning-input type="text" label="PAN Number" placeholder="Enter PAN Number"
+                        value={applicantPAN} onchange={handlePANchange} maxlength="10" minlength="10" required></lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="5" class="slds-m-left_medium">
+                            <lightning-file-upload label="Upload PAN Card"
+                                    name="fileUploader"
+                                    accept=".pdf, .png, .jpg, .jpeg"
+                                    onuploadfinished={handleUploadFinished}>
+                            </lightning-file-upload>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+                <!--UPLOAD FILE
+                <div class="slds-modal__content slds-p-around_medium">
+                 </div>-->
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-button variant="brand-outline" label="Verify PAN" disabled={PanValidation} onclick={handleGenerateScore}></lightning-button>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <!--TO Generate Random CIBIL score-->
+                    CIBIL Score : {cibilScore} <br>
+                    Risk Category: {riskCategory}
+                </div>
+                <!-- Footer -->
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="neutral" label="Cancel" onclick={closeModal}></lightning-button>
+                    <lightning-button variant="brand" label="Proceed" onclick={OpenModal2} disabled={disable1}
+                        class="slds-m-left_small"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+     <!-- Modal 2 for Entering Personal Details -->
+     <template if:true={ModalOpen2}>
+        <section role="dialog" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Header -->
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium">Enter Address Details</h2>
+                    <lightning-button-icon icon-name="utility:close" variant="bare-inverse" class="slds-modal__close"
+                        onclick={closeModal}></lightning-button-icon>
+                </header>
+                <!-- Body -->  <!--Address-->
+                 <lightning-layout multiple-rows>
+                    <lightning-layout-item size="6">
+                        <div class="slds-modal__content slds-p-horizontal_medium">
+                            <lightning-input-address
+                                    address-label="Current Address"
+                                    street-label="Street"
+                                    city-label="City"
+                                    country-label="Country"
+                                    province-label="State"
+                                    postal-code-label="Postal Code"
+                                    field-level-help="Enter your Current address here!"
+                                    country-options={getCountryOptions}
+                                    province-options={getProvinceOptions}
+                                    onchange={handleCurrentAddress} ></lightning-input-address>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6">
+                        <div class="slds-modal__content slds-p-horizontal_medium">
+                            <lightning-input-address
+                            address-label="Permanent Address"
+                            street-label="Street"
+                            city-label="City"
+                            country-label="Country"
+                            province-label="State"
+                            postal-code-label="Postal Code"
+                            street={permanentStreet}
+                            city={permanentCity}
+                            country={permanentCountry}
+                            province={permanentState}
+                            postal-code={permanentPostalCode}
+                            field-level-help="Enter your permanent address here!"
+                            country-options={getCountryOptions}
+                            province-options={getProvinceOptions}
+                            onchange={handlePermanentAddress}
+                            disabled={handlePermanantDisable}>
+                        </lightning-input-address>
+                            <!--    street={address.street}
+                                    city={address.city}
+                                    country={address.country}
+                                    province={address.province}
+                                    postal-code={address.postalCode}-->
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12">
+                        <div class="slds-modal__content slds-p-horizontal_medium">
+                        <lightning-input type="checkbox" onchange={HandleCheckBox} value={checkBoxValue} label="Permanent And Current Address are same"></lightning-input>
+                    </div>
+                    </lightning-layout-item>
+                 </lightning-layout>
+                <!-- Footer -->
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="brand-outline" label="Previous" onclick={previous1}></lightning-button>
+                    <lightning-button variant="brand" label="Proceed" onclick={OpenModal3}
+                        class="slds-m-left_small"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+5:38
+<!-- Modal 3 for Entering Degree AND occupation -->
+    <template if:true={ModalOpen3}>
+        <section role="dialog" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Header -->
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium">Enter Professional Details</h2>
+                    <lightning-button-icon icon-name="utility:close" variant="bare-inverse" class="slds-modal__close"
+                        onclick={closeModal}></lightning-button-icon>
+                </header>
+                <!-- Body -->  <!--degree and occupation-->
+                <div class="slds-modal__content slds-p-horizontal_medium">
+                    <lightning-input type="text" label="Degree" placeholder="Degree"
+                        value={Degree} onchange={handleDegree} required></lightning-input>
+                </div>
+                <div class="slds-modal__content slds-p-horizontal_medium">
+                    <lightning-input type="text" label="Institue" placeholder="Institue"
+                        value={Institue} onchange={handleInstitue} required></lightning-input>
+                </div>
+                <div class="slds-modal__content slds-p-horizontal_medium">
+                    <lightning-input type="text" label="Occupation" placeholder="Occupation"
+                        value={Occupation} onchange={handleOccupation} required></lightning-input>
+                </div>
+                <div class="slds-modal__content slds-p-horizontal_medium">
+                    <lightning-input type="number" label="Annual Income" placeholder="Annual Income"
+                        value={AnnualIncome} onchange={handleAnnualIncome} required></lightning-input>
+                </div>
+                <!-- Footer -->
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="brand-outline" label="Previous" onclick={previous2}></lightning-button>
+                    <lightning-button variant="brand" label="Submit Application" onclick={handleApplyLoan}
+                        class="slds-m-left_small"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

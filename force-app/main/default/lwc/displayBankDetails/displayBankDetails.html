@@ -1,0 +1,30 @@
+<template>
+    <lightning-card>
+        <h5 style="font-size: 15px;">Fetch Bank Details</h5>
+        <div class="slds-p-around_medium">
+            <lightning-input type="text" label="Enter IFSC code" placeholder="Enter IFSC code"
+                onchange={handleinput} value={IFSC} required>
+            </lightning-input>
+            <div class="slds-m-top_medium">
+                <lightning-button variant="Brand" label="Fetch Bank Details" onclick={handleClick}
+                    disabled={isButtondisabled}>
+                </lightning-button>
+            </div>
+        <br>
+            <template if:true={bankDetails}>
+                <div class="body">
+                    <h3 class="slds-text-heading_medium"><u>Bank Details</u></h3>
+                    <p><strong>Bank:</strong> {bankDetails.BANK}</p>
+                    <p><strong>Branch:</strong> {bankDetails.BRANCH}</p>
+                    <p><strong>Address:</strong> {bankDetails.ADDRESS}</p>
+                    <p><strong>City:</strong> {bankDetails.CITY}</p>
+                    <p><strong>State:</strong> {bankDetails.STATE}</p>
+                    <p><strong>IFSC:</strong> {bankDetails.IFSC}</p>
+                     <br>
+                        <lightning-button variant="Brand" label="Save Details" onclick={saveClick}>
+                        </lightning-button>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

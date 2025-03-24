@@ -1,0 +1,20 @@
+<template>
+    <div class="slider-container">
+        <template for:each={watches} for:item="watch">
+            <div key={watch.id} class="slide fade" if:true={watch.isActive}>
+                <img src={watch.image} alt={watch.name} class="watch-image">
+            </div>
+        </template>
+
+        <!-- Navigation Buttons -->
+        <button class="prev" onclick={prevSlide}>&#10094;</button>
+        <button class="next" onclick={nextSlide}>&#10095;</button>
+
+        <!-- Slider Dots -->
+        <div class="dots-container">
+            <template for:each={watches} for:item="watch">
+                <span key={watch.id} class={watch.dotClass} data-id={watch.id} onclick={goToSlide}></span>
+            </template>
+        </div>
+    </div>
+</template>

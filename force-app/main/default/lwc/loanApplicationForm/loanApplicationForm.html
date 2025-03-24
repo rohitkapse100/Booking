@@ -1,0 +1,110 @@
+<template>
+    <lightning-card title="Loan Application Form">
+        <div class="slds-m-around_medium">
+            <!-- Loan Name -->
+            <lightning-input label="Loan Name" value={loanName} onchange={handleNameChange}></lightning-input>
+            <!-- Loan Amount -->
+            <lightning-input type="number" label="Loan Amount" value={loanAmount} onchange={handleAmountChange}></lightning-input>
+            <!-- Interest Rate (Read-only, fetched dynamically) -->
+            <lightning-input type="number" label="Interest Rate (%)" value={interestRate} disabled></lightning-input>
+            <!-- Tenure -->
+            <lightning-input type="number" label="Tenure (Months)" value={tenure} onchange={handleTenureChange}></lightning-input>
+            <!-- Personal Details Button -->
+            <lightning-button label="Enter Personal Details" onclick={openPersonalDetails} class="slds-m-top_medium"></lightning-button>
+            <!-- Education Details Button -->
+            <lightning-button label="Enter Education Details" onclick={openEducationDetails} class="slds-m-left_small"></lightning-button>
+             <!-- Attachment Details Button -->
+            <lightning-button label="Attach Documents" onclick={openAttachDocuments} class="slds-m-left_small"></lightning-button>
+            <!-- Submit Button (Disabled until details are saved) -->
+            <lightning-button label="Submit Loan Application" variant="brand" onclick={handleSubmit} class="slds-m-left_small" disabled={isApplicationDisabled}></lightning-button>
+        </div>
+    </lightning-card>
+    <!-- Personal Details Modal -->
+    <template if:true={isPersonalDetailsOpen}>
+        <section role="dialog" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium">Personal Details</h2>
+                    <lightning-button-icon icon-name="utility:close" variant="bare-inverse" alternative-text="Close" onclick={closePersonalDetails}></lightning-button-icon>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-input label="Full Name" value={fullName} onchange={handleFullName}></lightning-input>
+                    <lightning-input label="PAN Number" value={panNo} onchange={handlePan} maxlength="10"></lightning-input>
+                    <lightning-input type="text" label="Pin Code" value={currentPinCode}
+                    onchange={handleAddress} placeholder="Enter Pin Code" ></lightning-input>
+                    <lightning-input label="City" value={city} onchange={handleCity}></lightning-input>
+                    <lightning-input label="State" value={state} onchange={handleState}></lightning-input>
+                    <lightning-button label="Verify PAN & Fetch CIBIL Score" onclick={verifyPan} class="slds-m-top_small"></lightning-button>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Save" variant="brand" onclick={savePersonalDetails}></lightning-button>
+                    <lightning-button label="Close" variant="neutral" onclick={closePersonalDetails} class="slds-m-left_small"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!-- Education Details Modal -->
+    <template if:true={isEducationDetailsOpen}>
+        <section role="dialog" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium">Education Details</h2>
+                    <lightning-button-icon icon-name="utility:close" variant="bare-inverse" alternative-text="Close" onclick={closeEducationDetails}></lightning-button-icon>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-input type="number" label="10th Percentage" value={sscDetails} onchange={handle10th}></lightning-input>
+                    <lightning-input type="number" label="12th Percentage" value={hscDetails} onchange={handle12th}></lightning-input>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Save" variant="brand" onclick={saveEducationDetails}></lightning-button>
+                    <lightning-button label="Close" variant="neutral" onclick={closeEducationDetails} class="slds-m-left_small"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!-- Attach Documents Details Modal -->
+    <template if:true={isAttachDocumentsOpen}>
+        <section role="dialog" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium">Attaching Documents Details (optional)</h2>
+                    <lightning-button-icon icon-name="utility:close" variant="bare-inverse" alternative-text="Close" onclick={closeAttachDocuments}></lightning-button-icon>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                   <h1> UPLOAD YOUR DOCUMENTS</h1>
+                    <lightning-file-upload label="Upload"
+                    name="fileUploader"
+                    accept=".pdf, .png, .jpg, .jpeg"
+                    onuploadfinished={handleUploadFinished}>
+                </lightning-file-upload>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Save" variant="brand" onclick={saveAttachDocuments}></lightning-button>
+                    <lightning-button label="Close" variant="neutral" onclick={closeAttachDocuments} class="slds-m-left_small"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!-- CIBIL Score Popup -->
+    <template if:true={isCibilPopupOpen}>
+        <section role="dialog" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium">CIBIL Score</h2>
+                    <lightning-button-icon icon-name="utility:close" variant="bare-inverse" alternative-text="Close" onclick={closeCibilPopup}></lightning-button-icon>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <p>Your CIBIL Score: <strong>{cibilScore}</strong></p>
+                    <p>{cibilMessage}</p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="OK" variant="brand" onclick={closeCibilPopup}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

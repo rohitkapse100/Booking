@@ -1,0 +1,40 @@
+<template>
+  <lightning-layout>
+      <lightning-layout-item size="4">
+
+      </lightning-layout-item>
+
+      <lightning-layout-item size="4">
+          <lightning-layout multiple-rows>
+              <lightning-layout-item size="12">
+                  <lightning-input type="number" label="Enter Number One" onchange={handleOnchangeNumberOne}>
+
+                  </lightning-input>
+              </lightning-layout-item>
+              <lightning-layout-item size="12">
+                  <lightning-input type="number" label="Enter Number Two" onchange={handleOnChangeNumberTwo}>
+
+                  </lightning-input>
+              </lightning-layout-item>
+              <lightning-layout-item size="12">
+                  <lightning-button label="Add" variant="brand" onclick={handleAdd}>
+
+                  </lightning-button> 
+              </lightning-layout-item>
+              <lightning-layout-item size="12">
+                <lightning-button label="Sub" variant="brand" onclick={handlesub}>
+
+                </lightning-button> 
+            </lightning-layout-item>
+              <lightning-layout-item size="12">
+                  RESULT IS -- {result}
+                 
+              </lightning-layout-item>
+          </lightning-layout>
+      </lightning-layout-item>
+
+      <lightning-layout-item size="4">
+
+      </lightning-layout-item>
+  </lightning-layout>
+</template>
