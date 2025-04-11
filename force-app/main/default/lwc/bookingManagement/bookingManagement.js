@@ -10,12 +10,12 @@ export default class BookingManagement extends LightningElement {
             this.bookings = data.map(booking => ({
                 Id: booking.Id,
                 CustomerName: booking.Customer__r?.Name || 'N/A',
-                CustomerEmail: booking.Customer__r?.Email__c || 'N/A',
+                CustomerEmail: booking.Customer__r?.Email || 'N/A',
                 MoverName: booking.Mover__r?.Name || 'N/A',
                 MoverContact: booking.Mover__r?.Phone__c || 'N/A',
                 Pickup_Location__c: booking.Pickup_Location__c || 'N/A',
                 Drop_Location__c: booking.Drop_Location__c || 'N/A',
-                Amount__c: booking.Amount__c ? `$${booking.Amount__c.toFixed(2)}` : '$0.00',
+                Amount__c: booking.Amount__c ? `${booking.Amount__c.toFixed(2)}` : '$0.00',
                 Booking_Date__c: booking.Booking_Date__c || 'N/A',
                 Status__c: booking.Status__c || 'N/A',
                 statusClass: this.getStatusClass(booking.Status__c)
