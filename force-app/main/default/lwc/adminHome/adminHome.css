@@ -1,0 +1,16 @@
+.admin-home {
+    text-align: center;
+    padding: 20px;
+}
+
+.banner h1, .banner p, .quick-links p {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.hover-effect:hover {
+    transform: scale(1.05);
+    color: #0070d2;
+}

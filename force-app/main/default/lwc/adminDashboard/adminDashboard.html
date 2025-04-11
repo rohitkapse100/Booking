@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="Admin Dashboard" icon-name="utility:chart">
+        <div class="dashboard">
+            <div class="booking-card total">
+                <h2>Total Bookings</h2>
+                <p class="booking-count">{totalBookings}</p>
+            </div>
+            <div class="booking-card confirmed">
+                <h2>Confirmed Bookings</h2>
+                <p class="booking-count">{confirmedBookings}</p>
+            </div>
+            <div class="booking-card rejected">
+                <h2>Rejected Bookings</h2>
+                <p class="booking-count">{rejectedBookings}</p>
+            </div>
+            <div class="booking-card pending">
+                <h2>Pending Bookings</h2>
+                <p class="booking-count">{pendingBookings}</p>
+            </div>
+            <div class="booking-card approved">
+                <h2>Movers Approved</h2>
+                <p class="booking-count">{moversApproved}</p>
+            </div>
+            <div class="booking-card mover-rejected">
+                <h2>Movers Rejected</h2>
+                <p class="booking-count">{moversRejected}</p>
+            </div>
+        </div>
+    </lightning-card>
+</template>

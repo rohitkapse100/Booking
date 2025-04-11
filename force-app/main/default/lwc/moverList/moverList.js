@@ -1,7 +1,7 @@
 import { LightningElement, wire, track } from 'lwc';
 import getApprovedMovers from '@salesforce/apex/MoverController.getApprovedMovers';
 
-export default class moverList extends LightningElement {
+export default class MoverList extends LightningElement {
     @track movers;
 
     @wire(getApprovedMovers)

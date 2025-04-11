@@ -1,0 +1,86 @@
+.dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px;
+}
+
+/* Consistent Small Box Size */
+.booking-card {
+    width: 180px;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.booking-card:hover {
+    transform: scale(1.07);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Background Colors */
+.total {
+    background: linear-gradient(135deg, #0070d2, #004ba0);
+    color: white;
+}
+
+.confirmed {
+    background: linear-gradient(135deg, #28a745, #1e7e34);
+    color: white;
+}
+
+.rejected {
+    background: linear-gradient(135deg, #dc3545, #a71d2a);
+    color: white;
+}
+
+.pending {
+    background: linear-gradient(135deg, #ffc107, #d39e00);
+    color: black;
+}
+
+.approved {
+    background: linear-gradient(135deg, #17a2b8, #117a8b);
+    color: white;
+}
+
+.mover-rejected {
+    background: linear-gradient(135deg, #6c757d, #495057);
+    color: white;
+}
+
+/* Typography */
+.booking-card h2 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.booking-count {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 5px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

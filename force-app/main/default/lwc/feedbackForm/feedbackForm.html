@@ -1,0 +1,29 @@
+<template>
+    <div style="text-align: center; margin: 20px;">
+        <!-- Star Ratings -->
+        <div style="font-size: 30px; margin: 15px 0;">
+            <template for:each={ratingOptions} for:item="star">
+                <a href="javascript:void(0);" key={star.value} onclick={handleStarClick} data-value={star.value}
+                    style="text-decoration: none; cursor: pointer; padding: 5px;"
+                    class={star.starClass}>
+                    ★
+                </a>
+            </template>
+        </div>
+
+        <!-- Textarea for Comments -->
+        <div style="margin-top: 10px;">
+            <label>Leave a Review (Optional)</label>
+            <textarea style="width: 60%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; text-align: center; display: block; margin: 5px auto;"
+                      value={comments}
+                      onchange={handleCommentChange}
+                      placeholder="Share your feedback...">
+            </textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div style="margin-top: 10px;">
+            <lightning-button label="Submit Review" variant="brand" onclick={handleSubmit}></lightning-button>
+        </div>
+    </div>
+</template>

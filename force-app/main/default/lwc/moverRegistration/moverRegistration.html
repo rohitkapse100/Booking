@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title="Mover Registration" icon-name="standard:individual">
+        <div class="slds-p-around_medium">
+            <lightning-input label="Mover Name" value={moverName} onchange={handleInputChange} data-field="moverName" required></lightning-input>
+            <lightning-input type="email" label="Email" value={email} onchange={handleInputChange} data-field="email" required></lightning-input>
+            <lightning-input type="phone" label="Phone" value={phone} onchange={handleInputChange} data-field="phone" required></lightning-input>
+            <lightning-input type="text" label="Location" value={location} onchange={handleInputChange} data-field="location"></lightning-input>
+            
+            <lightning-combobox
+                label="Availability"
+                options={availabilityOptions}
+                value={availability}
+                onchange={handleInputChange}
+                data-field="availability"
+                required>
+            </lightning-combobox>
+
+            <div class="slds-m-top_medium">
+                <lightning-button label="Register" variant="brand" onclick={handleRegister}></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

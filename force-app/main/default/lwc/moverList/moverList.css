@@ -1,0 +1,46 @@
+.movers-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.mover-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.mover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.mover-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.mover-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #0070d2;
+}
+
+.mover-details p {
+    font-size: 1rem;
+    color: #333;
+    margin: 6px 0;
+}
+
+.no-movers {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #555;
+    font-style: italic;
+}

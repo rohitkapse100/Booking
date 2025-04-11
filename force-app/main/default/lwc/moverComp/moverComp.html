@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Mover Booking Requests">
+        <lightning-datatable
+            key-field="Id"
+            data={bookings}
+            columns={columns}
+            hide-checkbox-column="true"
+            onrowaction={handleRowAction}>
+        </lightning-datatable>
+    </lightning-card>
+</template>

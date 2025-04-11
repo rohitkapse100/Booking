@@ -1,0 +1,20 @@
+<template>
+    <div class="slider-container">
+        <template for:each={slides} for:item="slide">
+            <div key={slide.id} class="slide fade" if:true={slide.isActive}>
+                <img src={slide.image} alt={slide.name} class="carousel-image">
+            </div>
+        </template>
+
+        <!-- Navigation Buttons -->
+        <button class="prev" onclick={prevSlide}>&#10094;</button>
+        <button class="next" onclick={nextSlide}>&#10095;</button>
+
+        <!-- Slider Dots -->
+        <div class="dots-container">
+            <template for:each={slides} for:item="slide">
+                <span key={slide.id} class={slide.dotClass} data-id={slide.id} onclick={goToSlide}></span>
+            </template>
+        </div>
+    </div>
+</template>

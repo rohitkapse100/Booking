@@ -1,0 +1,45 @@
+.table-container {
+    padding: 10px;
+    overflow-x: auto;
+}
+
+.slds-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-header {
+    background-color: #0176d3;
+    color: white;
+    font-weight: bold;
+    text-align: left;
+}
+
+.table-row:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.status-confirmed {
+    color: green;
+    font-weight: bold;
+}
+
+.status-inprogress {
+    color: blue;
+    font-weight: bold;
+}
+
+.status-rejected {
+    color: red;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: gray;
+    font-weight: bold;
+}
